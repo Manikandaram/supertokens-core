@@ -1,0 +1,21 @@
+void setup() {
+    Serial.begin(9600);
+    pinMode(PUMP_PIN, OUTPUT);
+    digitalWrite(PUMP_PIN, LOW); 
+}
+
+void loop() {
+    int soilMoistureValue = analogRead(MOISTURE_SENSOR_PIN);
+    Serial.print("Soil Moisture Level: ");
+    Serial.println(soilMoistureValue);
+
+    if (soilMoistureValue < MOISTURE_THRESHOLD) {
+        digitalWrite(PUMP_PIN, HIGH);
+        Serial.println("Pump is ON");
+    } else {
+        digitalWrite(PUMP_PIN, LOW); 
+        Serial.println("Pump is OFF");
+    }
+
+    delay(1000); 
+}
